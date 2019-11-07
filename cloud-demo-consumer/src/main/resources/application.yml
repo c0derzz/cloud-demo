@@ -1,0 +1,9 @@
+server.port: 1114
+#为服务命名
+spring.application.name: demo
+#指定服务注册中心的地址
+eureka.client.service-url.defaultZone: http://localhost:1111/eureka/
+spring:
+  profiles:
+    #启动参数指定activeProfile=dev/prod
+    active: ${activeProfile}

@@ -1,0 +1,36 @@
+#服务端口
+server.port: 1116
+#服务名称
+spring.application.name: configServer
+#服务注册中心
+eureka.client.service-url.defaultZone: http://localhost:1111/eureka/
+
+
+#服务的git仓库地址
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        git:
+          uri: https://github.com/lrcself/spring-cloud-demo.git
+          #强制从远程存储位置提取
+          force-pull: true
+          #配置文件所在的目录
+          search-paths: /config-repo
+          #git仓库的用户名
+          #username:
+          #git仓库的密码
+          #password:
+      #配置文件所在的分支
+      label: master
+
+          #设置一个文件目录供配置文件存储 防止系统清理临时目录
+          #basedir: /config/
+          #{application}/{profile}不匹配任何模式，它将使用在“spring.cloud.config.server.git.uri”下定义的默认uri
+          # 对于应用名称为dev开头的所用应用将匹配到以下资源库中
+          #repos:
+            #develop:
+              #pattern: dev*
+              #uri: https://github.com/lrcself/spring-cloud-demo.git

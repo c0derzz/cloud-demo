@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+      #配置config名称 文件名格式为 ${cloud.config.name}-{profile}.yml
+      name: demo
+      discovery:
+        enabled: true
+        service-id: configServer
+      profile: prod
+      label: master
+      fail-fast: true

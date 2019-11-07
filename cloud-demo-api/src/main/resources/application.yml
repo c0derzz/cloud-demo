@@ -1,0 +1,10 @@
+server:
+  port: 1112
+#配置服务命名，不区分大小写，在注册中心管理界面默认大写显示。
+spring:
+  application:
+    name: service-ab
+#指定服务注册中心的地址
+#eureka.client.service-url:
+#  defaultZone: http://127.0.0.1:1111/eureka/
+management.security.enabled: false

@@ -1,0 +1,15 @@
+server:
+  port: 1111
+eureka:
+  client:
+    service-url:
+      #服务注册中心的地址，供其他服务组件调用进行注册。 集群则注册 注册其他服务中心
+      #default-zone: http://localhost:1112/eureka/,http://localhost:1113/eureka/
+      default-zone: http://localhost:1111/eureka/
+    #是否检索服务
+    fetch-registry: false
+    register-with-eureka: false
+  instance:
+    hostname: localhost
+  server:
+    enable-self-preservation: false #在调试时关闭eureka注册中心的保护机制

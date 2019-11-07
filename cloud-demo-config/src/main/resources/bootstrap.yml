@@ -1,0 +1,9 @@
+#对称加密密钥 要放到bootstrap.yml中
+encrypt:
+  key: selfDemo
+  #非对称加密
+#  key-store:
+#    location: classpath:/keyStore.jks
+#    password: selfflyer
+#    alias: selfDemo
+#    secret: selfKey

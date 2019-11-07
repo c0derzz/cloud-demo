@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    config:
+      name: demo
+      discovery:
+        enabled: true
+        service-id: configServer
+      profile: dev
+      label: master
+      fail-fast: true
