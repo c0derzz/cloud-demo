@@ -7,6 +7,11 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
+import io.netty.util.CharsetUtil;
+
+import java.util.Scanner;
 
 /**
  * Created by liruichuan on 2018/9/11.
@@ -31,11 +36,23 @@ public class EchoClient {
             client.group(group).channel(NioSocketChannel.class).remoteAddress(this.host,this.port).handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
+                    socketChannel.pipeline().addLast("decoder", new StringDecoder(CharsetUtil.UTF_8));
+                    socketChannel.pipeline().addLast("encoder", new StringEncoder(CharsetUtil.UTF_8));
                     socketChannel.pipeline().addLast(new EchoClientHandler());
                 }
             });
 
             ChannelFuture channelFuture = client.connect().sync();
+            Scanner sca = new Scanner(System.in);
+            while(true){
+                String clientMsg = sca.nextLine();
+                //如果用户输入退出指令 则退出 关闭客户端
+                if("exit".equalsIgnoreCase(clientMsg)){
+                    break;
+                }
+                //发送信息给服务端
+                channelFuture.channel().writeAndFlush("siri:"+clientMsg);
+            }
             channelFuture.channel().closeFuture().sync();
 
         }catch(Exception e){

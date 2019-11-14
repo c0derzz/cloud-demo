@@ -7,6 +7,9 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.codec.string.StringEncoder;
+import io.netty.util.CharsetUtil;
 
 /**
  * Created by liruichuan on 2018/9/8.
@@ -32,12 +35,15 @@ public class EchoServer {
             server.group(group).channel(NioServerSocketChannel.class).localAddress(port).childHandler(new ChannelInitializer<Channel>() {
                 @Override
                 protected void initChannel(Channel channel) throws Exception {
+                    channel.pipeline().addLast("decoder", new StringDecoder(CharsetUtil.UTF_8));
+                    channel.pipeline().addLast("encoder", new StringEncoder(CharsetUtil.UTF_8));
                     channel.pipeline().addLast(new EchoServerHandler());
                 }
             });
             //绑定服务器 阻塞 直到绑定服务器完成
             ChannelFuture channelFuture = server.bind().sync();
             System.out.println(this.getClass().getName()+" started and listen on port " + channelFuture.channel().localAddress());
+            channelFuture.channel().closeFuture().sync();
         }finally {
             group.shutdownGracefully().sync();
         }

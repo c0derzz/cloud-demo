@@ -1,16 +1,16 @@
 package com.self.cloud.demo.netty;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 
 /**
  * Created by liruichuan on 2018/9/11.
  */
-public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
+public class EchoClientHandler extends ChannelInboundHandlerAdapter {
+
+
 
     /**
      * 从服务器接收到数据后调用
@@ -19,8 +19,8 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
      * @throws Exception
      */
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf msg) throws Exception {
-        System.out.println("Client received: " + ByteBufUtil.hexDump(msg.readBytes(msg.readableBytes())));
+    public void channelRead(ChannelHandlerContext channelHandlerContext, Object msg) throws Exception {
+        System.out.println("Client received: " + msg);
     }
 
     /**
@@ -30,8 +30,9 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channelActive...");
         //连接服务器之后 向服务器写数据
-        ctx.write(Unpooled.copiedBuffer("Netty rocks! ", CharsetUtil.UTF_8));
+        ctx.writeAndFlush(Unpooled.copiedBuffer("Netty rocks! ", CharsetUtil.UTF_8));
     }
 
     /**
