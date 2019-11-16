@@ -17,6 +17,7 @@ public class ServiceController {
         return "hello I am is service ";
     }
     @ApiOperation(value = "getHelloInfo接口",notes = "根据用户名返回值")
+
     //@ApiImplicitParam
     @RequestMapping(value = "/HelloInfo",method = RequestMethod.GET)
     public String getHelloInfo(@ApiParam(value = "userName",name = "用户名",required = true,example = "coder")String userName){
