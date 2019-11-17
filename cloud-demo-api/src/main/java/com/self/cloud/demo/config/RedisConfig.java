@@ -40,17 +40,19 @@ public class RedisConfig{
             @Value("${spring.redis.jedis.pool.max-idle}") int maxIdle,
             @Value("${spring.redis.jedis.pool.min-idle}") int minIdle,
             @Value("${spring.redis.host}") String hostName,
-            @Value("${spring.redis.port}") int port){
+            @Value("${spring.redis.port}") int port,
+            @Value("${spring.redis.password}") String password
+    ){
 
         /** ========= 基本配置 ========= */
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
         configuration.setHostName(hostName);
         configuration.setPort(port);
         configuration.setDatabase(database);
-        /*if (!ObjectUtils.isEmpty(password)) {
+        if (!ObjectUtils.isEmpty(password)) {
             RedisPassword redisPassword = RedisPassword.of(password);
             configuration.setPassword(redisPassword);
-        }*/
+        }
 
         /** ========= 连接池通用配置 ========= */
         GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();

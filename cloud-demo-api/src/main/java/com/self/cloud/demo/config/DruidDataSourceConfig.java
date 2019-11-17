@@ -16,7 +16,7 @@ import javax.sql.DataSource;
  * @Date: 2019/11/16 16:58
  * @Description: DruidDataSource 监控配置
  */
-@Configuration
+//@Configuration
 public class DruidDataSourceConfig {
     /**
      * 主要实现web监控的配置处理

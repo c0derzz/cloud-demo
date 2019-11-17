@@ -3,8 +3,6 @@ package com.self.cloud.demo.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @Auther: LiRuiChuan

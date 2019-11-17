@@ -12,11 +12,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class DemoApiApplication {
 
     public static void main(String[] args) {
-        System.setProperty("javax.net.ssl.trustStore","D:\\github-workspace\\mysql-cert\\truststore");
-        System.setProperty("javax.net.ssl.trustStorePassword","Selfflyer129!@(");
-        System.setProperty("javax.net.ssl.keyStore","D:\\github-workspace\\mysql-cert\\truststore");
-        System.setProperty("javax.net.ssl.keyStorePassword","Selfflyer129!@(");
-
         ConfigurableApplicationContext context = SpringApplication.run(DemoApiApplication.class, args);
 
         System.out.println("容器启动成功......");
