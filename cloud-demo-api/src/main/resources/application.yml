@@ -1,12 +1,67 @@
 server:
   port: 1112
+spring.profiles.active: libriay
+server.ip: 192.168.22.108
+
 #配置服务命名，不区分大小写，在注册中心管理界面默认大写显示。
-spring:
-  application:
-    name: service-ab
-#指定服务注册中心的地址
+spring.application.name: service-ab#指定服务注册中心的地址
 #eureka.client.service-url:
 #  defaultZone: http://127.0.0.1:1111/eureka/
 
-#暴露端点
-management.endpoints.web.exposure.include: refresh
+#健康检查 actuator 监控
+management:
+  #自定义web端口 -1 则关闭web管理
+  server.port: 9999
+  endpoints.web:
+    #Spring Boot 2.0的端点基础路径由“/”调整到”/actuator”下,如：/info调整为/actuator/info
+    #https://blog.csdn.net/alinyua/article/details/80009435
+    base-path: /
+    exposure:
+      include: '*'
+      #不包含这些端点
+      exclude: env,beans
+
+#模板配置
+spring.thymeleaf:
+  prefix: classpath:/templates/
+  suffix: .html
+  mode: HTML5
+  encoding: UTF-8
+  servlet:
+    content-type: text/html
+spring.jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+#redis 缓存配置 单节点
+spring.redis:
+  host: ${server.ip}
+  port: 6379
+  database: 0
+  password: 123456789
+  timeout: 300
+  jedis.pool:
+    max-active: 1024
+    max-wait: 60
+    max-idle: 200
+    min-idle: 0
+#Mysql 及jpa配置
+spring.datasource:
+  #主库
+  url: jdbc:mysql://${server.ip}:3306/cloud-demo?characterEncoding=utf8&characterSetResults=utf8&useSSL=true&serverTimezone=GMT%2B8
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  username: selfflyer
+  password: 'Selfflyer315#!%'
+  type: com.alibaba.druid.pool.DruidDataSource
+  #xa.data-source-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+  #数据库连接池  可以使用 hikari
+#spring jpa 相关配置
+spring.jpa:
+  database: MYSQL
+  show-sql: true
+  database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  hibernate:
+    ddl-auto: create
+    naming:
+      physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy

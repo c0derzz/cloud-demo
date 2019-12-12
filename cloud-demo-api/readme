@@ -1,0 +1,24 @@
+spring boot
+1.在Springboot中默认的静态资源路径有：classpath:/META-INF/resources/，classpath:/resources/，classpath:/static/，classpath:/public/
+static 文件夹存放静态文件：js css 图片 等资源
+templates 文件夹下存放页面 动态内容
+public 可以整合上面两个内容 都放到这个目录下 也可以访问
+
+2.配置热启动
+        <!--spring boot 热启动配置-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- spring boot  热启动 -->
+        <plugin>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-maven-plugin</artifactId>
+              <configuration>
+                <fork>true</fork>
+              </configuration>
+        </plugin>
+idea Setting---->Compiler设置（也可以快捷键：Ctrl+Alt+S），勾选"Build project automatically"
+点击快捷键Alt+Ctrl+shift+a+/，（如果不行，就点击Alt+shift+a）选择Registry，打开界面
+勾选 compiler.automake.allow.when.app.running即可
