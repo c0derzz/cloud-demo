@@ -1,5 +1,6 @@
 package com.self.cloud.demo.demo.netty;
 
+import com.self.cloud.demo.netty.EchoClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
