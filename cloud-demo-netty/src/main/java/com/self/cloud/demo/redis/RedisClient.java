@@ -55,7 +55,12 @@ public class RedisClient {
             return null;
         }
         JedisPoolConfig poolConfig = new JedisPoolConfig();
+        // 设置最大连接数
+        poolConfig.setMaxTotal(100);
+        // 设置最大空闲数
         poolConfig.setMaxIdle(100);
+        // 设置超时时间
+        poolConfig.setMaxWaitMillis(100);
         poolConfig.setTestOnBorrow(false);
         poolConfig.setTestOnReturn(false);
 
@@ -63,4 +68,6 @@ public class RedisClient {
         return jedisPool;
 
     }
+
+
 }
