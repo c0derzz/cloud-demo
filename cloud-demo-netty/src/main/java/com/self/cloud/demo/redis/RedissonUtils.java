@@ -7,6 +7,8 @@ import org.redisson.config.Config;
 import org.redisson.config.TransportMode;
 import reactor.core.publisher.Mono;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author: liruichuan
  * @Date: 2019/12/13 14:26
@@ -33,7 +35,7 @@ public class RedissonUtils {
         return Redisson.create(getConfig());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         RedissonClient client = getClient();
 
         RAtomicLong atomicLong = client.getAtomicLong("demo_long");
@@ -62,6 +64,15 @@ public class RedissonUtils {
         // RxJava2方式
         Single<Boolean> rxResult = longObject.compareAndSet(3, 401);
 
+
+        //布隆过滤器
+        RBloomFilter bloomFilter = client.getBloomFilter("demo_bloom_filter");
+        bloomFilter.add("a");
+        boolean contains = bloomFilter.contains("");
+
+        //获取锁
+        RLock lock = client.getLock("demo_lock");
+        lock.tryLock(10L,10L, TimeUnit.SECONDS);
 
     }
 }
