@@ -1,7 +1,6 @@
 server:
   port: 1112
-spring.profiles.active: libriay
-server.ip: 192.168.22.108
+spring.profiles.active: dev
 
 #配置服务命名，不区分大小写，在注册中心管理界面默认大写显示。
 spring.application.name: service-ab#指定服务注册中心的地址
@@ -36,10 +35,10 @@ spring.jackson:
       WRITE_DATES_AS_TIMESTAMPS: false
 #redis 缓存配置 单节点
 spring.redis:
-  host: ${server.ip}
+  host: 111.229.40.157
   port: 6379
   database: 0
-  password: 123456789
+  password: 123456
   timeout: 300
   jedis.pool:
     max-active: 1024
@@ -47,21 +46,22 @@ spring.redis:
     max-idle: 200
     min-idle: 0
 #Mysql 及jpa配置
-spring.datasource:
-  #主库
-  url: jdbc:mysql://${server.ip}:3306/cloud-demo?characterEncoding=utf8&characterSetResults=utf8&useSSL=true&serverTimezone=GMT%2B8
-  driver-class-name: com.mysql.cj.jdbc.Driver
-  username: selfflyer
-  password: 'Selfflyer315#!%'
-  type: com.alibaba.druid.pool.DruidDataSource
-  #xa.data-source-class-name: com.mysql.cj.jdbc.MysqlXADataSource
-  #数据库连接池  可以使用 hikari
-#spring jpa 相关配置
-spring.jpa:
-  database: MYSQL
-  show-sql: true
-  database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  hibernate:
-    ddl-auto: create
-    naming:
-      physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+spring:
+  datasource:
+    #主库
+    url: jdbc:mysql://111.229.40.157:3306/cloud-demo?characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #xa.data-source-class-name: com.mysql.cj.jdbc.MysqlXADataSource
+    #数据库连接池  可以使用 hikari
+  #spring jpa 相关配置
+  jpa:
+    database: MYSQL
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy

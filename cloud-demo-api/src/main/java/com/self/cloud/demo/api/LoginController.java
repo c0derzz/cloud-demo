@@ -1,8 +1,11 @@
 package com.self.cloud.demo.api;
 
+import com.alibaba.fastjson.JSONObject;
+import com.self.cloud.demo.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,26 @@ public class LoginController extends BaseController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+    @GetMapping("/register")
+    public String register(){
+        return "register";
+    }
+
+
+    /**
+     * 注册接口
+     * @param user
+     * @param modelMap
+     * @return
+     */
+    @PostMapping("/register")
+    public String registerUser(User user, ModelMap modelMap){
+
+        System.out.println(JSONObject.toJSONString(user));
+
+        return "redirect:/admin/login";
     }
 
     /**

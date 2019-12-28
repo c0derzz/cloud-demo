@@ -50,12 +50,9 @@ public class UserControllerTest {
     public void testAddUser() throws Exception {
         List<User> users = new ArrayList<>();
         User lee = new User();
-        lee.setName("lee");
-        lee.setAge(20);
+
 
         User wang = new User();
-        wang.setName("wang");
-        wang.setAge(20);
 
         users.add(lee);
         users.add(wang);

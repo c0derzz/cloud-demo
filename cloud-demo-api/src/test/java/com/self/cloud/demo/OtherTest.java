@@ -16,12 +16,9 @@ public class OtherTest {
     public static void main(String[] args) {
         List<User> users = new ArrayList<>();
         User lee = new User();
-        lee.setName("lee");
-        lee.setAge(20);
+
 
         User wang = new User();
-        wang.setName("wang");
-        wang.setAge(20);
 
         users.add(lee);
         users.add(wang);

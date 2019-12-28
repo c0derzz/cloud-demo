@@ -33,4 +33,5 @@ public class BaseEntity implements Serializable {
 
     @Column(name = "update_by",length = 11,columnDefinition = "int default 0")
     private Integer updateBy;
+
 }
