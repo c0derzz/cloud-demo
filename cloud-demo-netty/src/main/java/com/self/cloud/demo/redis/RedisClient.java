@@ -13,19 +13,25 @@ import redis.clients.jedis.Pipeline;
 public class RedisClient {
 
     private static final String HOST = "127.0.0.1";
-    private static final Integer PORT = 6379;
+    private static final Integer PORT = 6378;
 
-    public static void main(String[] args) {
-        JedisPool jedisPool = getJedisPool(HOST,PORT);
-        /*long start = System.currentTimeMillis();
-        testHset(jedisPool.getResource());
-        long end = System.currentTimeMillis();
-        System.out.println("testHset耗时：" + (end-start)/1000 + "s");*/
-
+    public static void main(String[] args) throws Exception{
+        /*JedisPool jedisPool = getJedisPool(HOST,PORT);
         long start = System.currentTimeMillis();
         testPipeline(jedisPool.getResource());
         long end = System.currentTimeMillis();
-        System.out.println("testPipeline耗时：" + (end-start)/1000.00 + "s");
+        System.out.println("testPipeline耗时：" + (end-start)/1000.00 + "s");*/
+
+        /*Jedis jedis = getJedisPool(HOST,PORT).getResource();
+        //String flag = jedis.set("text_proxy","value_proxy");
+        String value = jedis.get("text_proxy");
+        System.out.println(">>>>>>>"+value);
+        jedis.close();*/
+
+        OwnRedisClient client = new OwnRedisClient("127.0.0.1",6379);
+        String resp = client.set("aaa","aaa");
+
+        System.out.println("返回值："+resp);
 
     }
 
@@ -60,7 +66,7 @@ public class RedisClient {
         // 设置最大空闲数
         poolConfig.setMaxIdle(100);
         // 设置超时时间
-        poolConfig.setMaxWaitMillis(100);
+        poolConfig.setMaxWaitMillis(10000);
         poolConfig.setTestOnBorrow(false);
         poolConfig.setTestOnReturn(false);
 
