@@ -1,4 +1,4 @@
-package com.self.cloud.demo.demo.netty;
+package com.self.cloud.demo.netty;
 
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;

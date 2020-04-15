@@ -1,6 +1,8 @@
 package com.self.cloud.demo.api;
 
 import com.alibaba.fastjson.JSONObject;
+import com.self.cloud.demo.annotation.APILimit;
+import com.self.cloud.demo.annotation.APILimitType;
 import com.self.cloud.demo.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +24,7 @@ import java.util.List;
 public class UserController  {
 
     @RequestMapping(value = "/add",method = RequestMethod.GET)
+    @APILimit(name = "user/add",type = APILimitType.CUSTOMER,prefix = "TEST",key = "user_add",count = 5,period = 60)
     public String addUser(ModelMap modelMap){
         modelMap.put("title","添加用户");
         modelMap.put("today",new Date());
