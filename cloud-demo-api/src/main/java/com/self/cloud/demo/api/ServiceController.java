@@ -2,6 +2,8 @@ package com.self.cloud.demo.api;
 
 import com.self.cloud.demo.bean.User;
 import io.swagger.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -11,9 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class ServiceController {
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @ApiOperation(value = "hello info 接口",notes = "测试接口")
     @RequestMapping(value = "/Info",method = RequestMethod.GET)
     public String getInfo(){
+        redisTemplate.opsForValue().set("info", "info");
         return "hello I am is service ";
     }
     @ApiOperation(value = "getHelloInfo接口",notes = "根据用户名返回值")

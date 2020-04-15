@@ -16,6 +16,7 @@
         <module>cloud-demo-consumer-feign</module>
         <module>cloud-demo-config</module>
         <module>cloud-demo-netty</module>
+        <module>dubbo-demo</module>
     </modules>
 
     <parent>
@@ -242,6 +243,13 @@
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
             <version>1.47</version>
+        </dependency>
+
+        <!-- 打印出类的结构-->
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.10</version>
         </dependency>
 
     </dependencies>

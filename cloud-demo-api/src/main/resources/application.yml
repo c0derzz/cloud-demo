@@ -34,23 +34,38 @@ spring.jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
 #redis 缓存配置 单节点
-spring.redis:
-  host: 111.229.40.157
-  port: 6379
-  database: 0
-  password: 123456
-  timeout: 300
-  jedis.pool:
-    max-active: 1024
-    max-wait: 60
-    max-idle: 200
-    min-idle: 0
-#Mysql 及jpa配置
 spring:
+  redis:
+    host: 111.229.40.157
+    port: 6379
+    database: 0
+    password: 123456
+    timeout: 300
+    jedis.pool:
+      max-active: 1024
+      max-wait: 60
+      max-idle: 200
+      min-idle: 0
+#rabbitmq 配置
+  rabbitmq:
+    host: 111.229.40.157
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: selfflyer
+    cache.channel.size: 10
+    # 确认消息已经发送到交换机中
+    publisher-confirm-type: CORRELATED
+    # 确认消息已经发送到队列中
+    publisher-returns: true
+    #设置手动接收
+    listener.simple.acknowledge-mode: manual
+    
+#Mysql 及jpa配置
   datasource:
     #主库
-    url: jdbc:mysql://111.229.40.157:3306/cloud-demo?characterEncoding=utf8&characterSetResults=utf8
-    username: root
+    url: jdbc:mysql://111.229.40.157:3306/cloud_demo?characterEncoding=utf8&characterSetResults=utf8
+    username: selfflyer
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
